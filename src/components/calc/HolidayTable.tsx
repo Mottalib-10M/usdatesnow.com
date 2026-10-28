@@ -34,7 +34,7 @@ function rows(cal: Cal, y: number): Row[] {
 }
 function ics(list: Row[], title: string) {
   const d = (x: string) => x.replace(/-/g, '');
-  const ev = list.filter((r) => r.date).map((r, i) => ['BEGIN:VEVENT', `UID:${d(r.date!)}-${i}@us-dates`, `DTSTAMP:${d(r.date!)}T000000Z`, `DTSTART;VALUE=DATE:${d(r.date!)}`, `DTEND;VALUE=DATE:${d(addDays(r.date!, 1))}`, `SUMMARY:${r.name}${r.note ? ` (${r.note})` : ''}`.replace(/[,;]/g, (m) => `\\${m}`), 'END:VEVENT'].join('\r\n'));
+  const ev = list.filter((r) => r.date).map((r, i) => ['BEGIN:VEVENT', `UID:${d(r.date!)}-${i}@usdatesnow.com`, `DTSTAMP:${d(r.date!)}T000000Z`, `DTSTART;VALUE=DATE:${d(r.date!)}`, `DTEND;VALUE=DATE:${d(addDays(r.date!, 1))}`, `SUMMARY:${r.name}${r.note ? ` (${r.note})` : ''}`.replace(/[,;]/g, (m) => `\\${m}`), 'END:VEVENT'].join('\r\n'));
   return ['BEGIN:VCALENDAR', 'VERSION:2.0', `PRODID:-//Radif Partners//${title}//EN`, 'CALSCALE:GREGORIAN', ...ev, 'END:VCALENDAR'].join('\r\n');
 }
 

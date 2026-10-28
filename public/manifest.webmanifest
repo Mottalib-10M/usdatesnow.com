@@ -1,6 +1,6 @@
 {
- "name": "US Dates",
- "short_name": "US Dates",
+ "name": "US Dates Now",
+ "short_name": "US Dates Now",
  "description": "Live countdowns to every US holiday, the date of each one in 2026, 2027 and 2028 computed from its rule, and what is closed today: post office, banks and the stock market.",
  "start_url": "/en/",
  "display": "standalone",

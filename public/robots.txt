@@ -3,4 +3,4 @@ Allow: /
 
 Disallow: /*?*
 
-Sitemap: https://us-dates.example/sitemap-index.xml
+Sitemap: https://usdatesnow.com/sitemap-index.xml

@@ -1,6 +1,6 @@
 /** Configuration centrale du site (générée par new-site.py). */
-export const SITE_URL = "https://us-dates.example";
-export const SITE_NAMES: Record<string, string> = {"en": "US Dates"};
+export const SITE_URL = "https://usdatesnow.com";
+export const SITE_NAMES: Record<string, string> = {"en": "US Dates Now"};
 // Partie du nom affichée en couleur dans l'en-tête (RECETTE §10.3), « » pour aucune.
 export const BRAND_ACCENT = "";
 export const LANG_TAGS: Record<string, string> = {"en": "en-US"};
@@ -18,7 +18,7 @@ export const AUTHOR_DESC: Record<string, string> = {"en": "Radif Partners reads 
  *  themes reellement traites par le site, pas une liste de mots-cles : un sujet
  *  declare ici sans page qui le couvre est une declaration fausse. */
 export const KNOWS_ABOUT: Record<string, string[]> = {"en": ["US federal holidays under 5 U.S.C. 6103", "Observed holidays when a date falls on a weekend", "Federal Reserve and bank holidays", "Post office closures and mail delivery on holidays", "NYSE and Nasdaq market holidays", "Dates of Easter, Thanksgiving, Mother's Day and other US observances", "Solstices, equinoxes and lunar dates"]};
-export const CONTACT_EMAIL = "contact@us-dates.example";
+export const CONTACT_EMAIL = "contact@usdatesnow.com";
 export const THEME_COLOR = '#1F3A68';
 export const LOGO_SYMBOL = '31';
 export const BING_VERIFY_CODE = '';
