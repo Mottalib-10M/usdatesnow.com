@@ -1,0 +1,371 @@
+{
+  "_lisezmoi": "Every rule and every published date the site uses, read on the official page cited, on retrieved_at. Rules (n-th weekday, weekend shifts, Easter) are coded in src/lib/engine and tested against the lists below; published lists (NYSE, Federal Reserve, OPM) are kept here so the tests catch any difference.",
+  "year": 2026,
+  "retrieved_at": "2026-10-28",
+  "valid_from": "2026-01-01",
+  "valid_to": "2028-12-31",
+  "sources": {
+    "usc6103": {
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title5/html/USCODE-2023-title5-partIII-subpartE-chap61-subchapI-sec6103.htm",
+      "label": {
+        "en": "5 U.S.C. 6103, Holidays: the eleven legal public holidays and the Saturday rule (GovInfo, United States Code 2023 edition)"
+      }
+    },
+    "opm": {
+      "url": "https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/",
+      "label": {
+        "en": "OPM: Federal Holidays, tables for 2026, 2027 and 2028 with observed dates"
+      }
+    },
+    "opm_inlieu": {
+      "url": "https://www.opm.gov/policy-data-oversight/pay-leave/work-schedules/fact-sheets/federal-holidays-in-lieu-of-determination/",
+      "label": {
+        "en": "OPM fact sheet: Federal Holidays, \"In Lieu Of\" Determination (Saturday and Sunday holidays, Executive Order 11582)"
+      }
+    },
+    "eo2025": {
+      "url": "https://www.govinfo.gov/content/pkg/DCPD-202501210/html/DCPD-202501210.htm",
+      "label": {
+        "en": "Executive Order 14371 of 18 December 2025, closing executive departments on 24 and 26 December 2025 (GovInfo)"
+      }
+    },
+    "fed": {
+      "url": "https://www.federalreserve.gov/aboutthefed/k8.htm",
+      "label": {
+        "en": "Federal Reserve Board: Holidays Observed by the Federal Reserve System, 2026–2030"
+      }
+    },
+    "nyse": {
+      "url": "https://www.nyse.com/markets/hours-calendars",
+      "label": {
+        "en": "NYSE: Holidays and Trading Hours, 2026–2028, with 1:00 p.m. early closes"
+      }
+    },
+    "nasdaq": {
+      "url": "https://www.nasdaqtrader.com/trader.aspx?id=calendar",
+      "label": {
+        "en": "Nasdaq Trader: U.S. stock market holiday calendar"
+      }
+    },
+    "usps_pom": {
+      "url": "https://about.usps.com/postal-bulletin/2011/pb22313/html/updt_002.htm",
+      "label": {
+        "en": "Postal Bulletin 22313: Postal Operations Manual 125.22, National Holidays, Exhibits 125.22a (widely observed) and 125.22b (not widely observed)"
+      }
+    },
+    "usps_july4": {
+      "url": "https://about.usps.com/who/legal/foia/documents/delivery-operations/independence-day-2026.pdf",
+      "label": {
+        "en": "USPS memorandum of 22 June 2026: Operations Policy for the Independence Day Holiday, Saturday, July 4, 2026"
+      }
+    },
+    "usps_columbus": {
+      "url": "https://about.usps.com/who/legal/foia/documents/delivery-operations/del-ops-columbus-day-2025.pdf",
+      "label": {
+        "en": "USPS memorandum of 18 September 2025: Operations Policy for the Columbus Day Holiday (non-widely observed)"
+      }
+    },
+    "usps_juneteenth": {
+      "url": "https://about.usps.com/who/legal/foia/documents/delivery-operations/juneteenth-2026.pdf",
+      "label": {
+        "en": "USPS memorandum: Operations Policy for the Juneteenth Holiday 2026"
+      }
+    },
+    "usps_xmas": {
+      "url": "https://about.usps.com/newsroom/national-releases/2026/0922-usps-recommends-2026-holiday-mailing-shipping-dates.pdf",
+      "label": {
+        "en": "USPS news release of 22 September 2026: recommended 2026 holiday mailing and shipping dates"
+      }
+    },
+    "mothers": {
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title36/html/USCODE-2023-title36-subtitleI-partA-chap1-sec117.htm",
+      "label": {
+        "en": "36 U.S.C. 117, Mother's Day: the second Sunday in May"
+      }
+    },
+    "fathers": {
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title36/html/USCODE-2023-title36-subtitleI-partA-chap1-sec109.htm",
+      "label": {
+        "en": "36 U.S.C. 109, Father's Day: the third Sunday in June"
+      }
+    },
+    "election": {
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title2/html/USCODE-2023-title2-chap1-sec7.htm",
+      "label": {
+        "en": "2 U.S.C. 7, Time of election: the Tuesday next after the first Monday in November of even years"
+      }
+    },
+    "usagov_election": {
+      "url": "https://www.usa.gov/election-day",
+      "label": {
+        "en": "USAGov: Election Day"
+      }
+    },
+    "census_mothers": {
+      "url": "https://www.census.gov/newsroom/stories/mothers-day.html",
+      "label": {
+        "en": "U.S. Census Bureau: Mother's Day, Facts for Features"
+      }
+    },
+    "census_fathers": {
+      "url": "https://www.census.gov/newsroom/stories/fathers-day.html",
+      "label": {
+        "en": "U.S. Census Bureau: Father's Day, Facts for Features"
+      }
+    },
+    "census_valentine": {
+      "url": "https://www.census.gov/newsroom/stories/valentines-day.html",
+      "label": {
+        "en": "U.S. Census Bureau: Valentine's Day, Facts for Features"
+      }
+    },
+    "census_ff": {
+      "url": "https://www.census.gov/newsroom/facts-for-features.html",
+      "label": {
+        "en": "U.S. Census Bureau: Facts for Features (holiday statistics)"
+      }
+    },
+    "usagov_holidays": {
+      "url": "https://www.usa.gov/holidays",
+      "label": {
+        "en": "USAGov: Federal holidays"
+      }
+    },
+    "nfl_sb": {
+      "url": "https://www.nfl.com/news/super-bowl-lxiv-to-be-held-in-nashville-s-new-nissan-stadium-in-2030",
+      "label": {
+        "en": "NFL: future Super Bowl sites, with Super Bowl LXI at SoFi Stadium on 14 February 2027 and LXII in Atlanta in 2028"
+      }
+    },
+    "nws_seasons": {
+      "url": "https://www.weather.gov/cle/seasons",
+      "label": {
+        "en": "National Weather Service: the seasons, equinoxes and solstices"
+      }
+    },
+    "hk2027": {
+      "url": "https://www.gov.hk/en/about/abouthk/holiday/2027.htm",
+      "label": {
+        "en": "GovHK: General holidays for 2027 (Lunar New Year's Day 6 February, Good Friday 26 March), gazetted"
+      }
+    },
+    "fcna": {
+      "url": "https://www.fiqhcouncil.org/",
+      "label": {
+        "en": "Fiqh Council of North America: Islamic calendar announcements"
+      }
+    },
+    "archives_decl": {
+      "url": "https://www.archives.gov/founding-docs/declaration",
+      "label": {
+        "en": "National Archives: the Declaration of Independence"
+      }
+    },
+    "frcp6": {
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title28/html/USCODE-2023-title28-app-federalru-dup1-rule6.htm",
+      "label": {
+        "en": "Federal Rules of Civil Procedure, Rule 6: computing and extending time, legal holidays (GovInfo, United States Code 2023 edition)"
+      }
+    }
+  },
+  "federal": {
+    "_source": "usc6103, opm, opm_inlieu",
+    "observedRule": "Saturday holiday: the Friday before is the holiday for employees on a Monday-to-Friday week (5 U.S.C. 6103(b)); Sunday holiday: the Monday after (Executive Order 11582).",
+    "opm2026": [
+      "2026-01-01",
+      "2026-01-19",
+      "2026-02-16",
+      "2026-05-25",
+      "2026-06-19",
+      "2026-07-03",
+      "2026-09-07",
+      "2026-10-12",
+      "2026-11-11",
+      "2026-11-26",
+      "2026-12-25"
+    ],
+    "opm2027": [
+      "2027-01-01",
+      "2027-01-18",
+      "2027-02-15",
+      "2027-05-31",
+      "2027-06-18",
+      "2027-07-05",
+      "2027-09-06",
+      "2027-10-11",
+      "2027-11-11",
+      "2027-11-25",
+      "2027-12-24"
+    ],
+    "opm2028": [
+      "2027-12-31",
+      "2028-01-17",
+      "2028-02-21",
+      "2028-05-29",
+      "2028-06-19",
+      "2028-07-04",
+      "2028-09-04",
+      "2028-10-09",
+      "2028-11-10",
+      "2028-11-23",
+      "2028-12-25"
+    ],
+    "extraDaysByOrder": [
+      {
+        "dates": [
+          "2025-12-24",
+          "2025-12-26"
+        ],
+        "order": "Executive Order 14371",
+        "source": "eo2025"
+      }
+    ]
+  },
+  "fed": {
+    "_source": "fed",
+    "rule": "Saturday holiday: Reserve Banks open the Friday before (the Board of Governors closes); Sunday holiday: all offices closed the Monday after.",
+    "closed2026": [
+      "2026-01-01",
+      "2026-01-19",
+      "2026-02-16",
+      "2026-05-25",
+      "2026-06-19",
+      "2026-09-07",
+      "2026-10-12",
+      "2026-11-11",
+      "2026-11-26",
+      "2026-12-25"
+    ],
+    "closed2027": [
+      "2027-01-01",
+      "2027-01-18",
+      "2027-02-15",
+      "2027-05-31",
+      "2027-07-05",
+      "2027-09-06",
+      "2027-10-11",
+      "2027-11-11",
+      "2027-11-25"
+    ],
+    "closed2028": [
+      "2028-01-17",
+      "2028-02-21",
+      "2028-05-29",
+      "2028-06-19",
+      "2028-07-04",
+      "2028-09-04",
+      "2028-10-09",
+      "2028-11-23",
+      "2028-12-25"
+    ],
+    "saturdayOpenFridays": [
+      "2026-07-03",
+      "2027-06-18",
+      "2027-12-24",
+      "2027-12-31",
+      "2028-11-10"
+    ]
+  },
+  "nyse": {
+    "_source": "nyse",
+    "closed2026": [
+      "2026-01-01",
+      "2026-01-19",
+      "2026-02-16",
+      "2026-04-03",
+      "2026-05-25",
+      "2026-06-19",
+      "2026-07-03",
+      "2026-09-07",
+      "2026-11-26",
+      "2026-12-25"
+    ],
+    "closed2027": [
+      "2027-01-01",
+      "2027-01-18",
+      "2027-02-15",
+      "2027-03-26",
+      "2027-05-31",
+      "2027-06-18",
+      "2027-07-05",
+      "2027-09-06",
+      "2027-11-25",
+      "2027-12-24"
+    ],
+    "closed2028": [
+      "2028-01-17",
+      "2028-02-21",
+      "2028-04-14",
+      "2028-05-29",
+      "2028-06-19",
+      "2028-07-04",
+      "2028-09-04",
+      "2028-11-23",
+      "2028-12-25"
+    ],
+    "earlyClose": [
+      "2026-11-27",
+      "2026-12-24",
+      "2027-11-26",
+      "2028-07-03",
+      "2028-11-24"
+    ],
+    "earlyCloseTime": "1:00 p.m. ET",
+    "newYear2028Note": "New Year's Day 2028 falls on a Saturday and no holiday is observed: the market is open on Friday 31 December 2027.",
+    "hours": "9:30 a.m. to 4:00 p.m. ET"
+  },
+  "usps": {
+    "_source": "usps_pom, usps_july4, usps_columbus, usps_juneteenth",
+    "widelyObserved": [
+      "newyear",
+      "memorial",
+      "july4",
+      "labor",
+      "thanksgiving",
+      "christmas"
+    ],
+    "notWidelyObserved": [
+      "mlk",
+      "presidents",
+      "juneteenth",
+      "columbus",
+      "veterans"
+    ],
+    "saturdayRule": "A holiday that falls on a Saturday is observed on the Saturday: Friday is a normal day (memo of 22 June 2026 for 4 July 2026).",
+    "sundayRule": "A holiday that falls on a Sunday is observed on the Monday after.",
+    "xmasMailBy2026": {
+      "groundAdvantage": "2026-12-17",
+      "firstClass": "2026-12-17",
+      "priority": "2026-12-18",
+      "priorityExpress": "2026-12-19"
+    }
+  },
+  "superBowl": {
+    "_source": "nfl_sb",
+    "games": [
+      {
+        "number": "LX",
+        "date": "2026-02-08",
+        "venue": "Levi's Stadium, Santa Clara, California",
+        "status": "played"
+      },
+      {
+        "number": "LXI",
+        "date": "2027-02-14",
+        "venue": "SoFi Stadium, Inglewood, California",
+        "status": "scheduled"
+      },
+      {
+        "number": "LXII",
+        "date": null,
+        "venue": "Mercedes-Benz Stadium, Atlanta, Georgia",
+        "status": "date not announced"
+      }
+    ]
+  },
+  "hongKong2027": {
+    "_source": "hk2027",
+    "lunarNewYear": "2027-02-06",
+    "goodFriday": "2027-03-26"
+  }
+}

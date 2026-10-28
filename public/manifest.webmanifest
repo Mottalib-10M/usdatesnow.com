@@ -1,0 +1,21 @@
+{
+ "name": "US Dates",
+ "short_name": "US Dates",
+ "description": "Live countdowns to every US holiday, the date of each one in 2026, 2027 and 2028 computed from its rule, and what is closed today: post office, banks and the stock market.",
+ "start_url": "/en/",
+ "display": "standalone",
+ "background_color": "#ffffff",
+ "theme_color": "#1F3A68",
+ "icons": [
+  {
+   "src": "/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  }
+ ]
+}

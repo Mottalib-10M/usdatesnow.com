@@ -1,0 +1,28 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { LAST_UPDATED, AUTHOR_NAME, CONTACT_EMAIL, AUTHOR_ROLE, SITE_NAMES } from '../../data/site-config';
+import { route } from '../../i18n/routes';
+import { organizationSchema, breadcrumbSchema, profilePageSchema } from '../../lib/seo';
+import { displayDate } from '../../lib/format';
+import { PAGES } from '../../lib/guides';
+const lang = 'en';
+const n = PAGES.length + 1;
+---
+<PageLayout title="Radif Partners, publisher of US Dates: who we are, how" description="Who publishes US Dates, where each holiday date and closing rule comes from, what the countdowns do with your time zone, and what this site will never sell you." lang={lang} jsonLd={[organizationSchema(lang), profilePageSchema({ path: route('about', lang), lang }), breadcrumbSchema([{ name: 'Home', path: route('home', lang) }, { name: 'About', path: route('about', lang) }])]} breadcrumbs={[{ label: 'About' }]}>
+  <header class="mb-6"><p class="kicker">About</p><h1 class="mt-0 text-3xl font-bold text-navy-900 md:text-4xl">Who is behind {SITE_NAMES[lang]}</h1></header>
+  <div class="prose prose-slate max-w-none">
+    <div class="not-prose mb-6"><p class="text-lg font-semibold text-navy-900">{AUTHOR_NAME}</p><p class="text-navy-700">{AUTHOR_ROLE[lang]}</p></div>
+    <p>{SITE_NAMES[lang]} is published by {AUTHOR_NAME}, a company that builds free tools on public rules and public data. This site answers two everyday questions: when is it, and is it open? It is for anyone counting the days to a holiday, planning a long weekend, mailing a parcel before Christmas or wondering whether the bank will be open on Veterans Day.</p>
+    <h2>Why another countdown site</h2>
+    <p>Most countdown pages show a number and nothing else, often behind a wall of advertising, and most holiday lists stop at the current year. Here every date is worked out from the rule that sets it, in law or in an institution's own calendar, so next year's dates and the year after are there already, with the reason a holiday moves to a Friday or a Monday, and a different answer for federal offices, banks, the stock market and the post office when they do not close on the same day.</p>
+    <h2>Where the dates come from</h2>
+    <p>From the United States Code (5 U.S.C. 6103 for the eleven federal holidays, 36 U.S.C. 109 and 117 for Father's Day and Mother's Day, 2 U.S.C. 7 for Election Day), from the Office of Personnel Management, the Federal Reserve Board, the New York Stock Exchange and the Postal Service for the days each of them closes, and from astronomical algorithms for Easter, the seasons and lunar dates. Each page links to the texts behind it, and the <a href={route('method', lang)}>method page</a> explains each rule.</p>
+    <h2>What we are not</h2>
+    <p>We are not a government agency, the Postal Service, a bank, the Federal Reserve or an exchange, and we cannot tell you the hours of a particular branch. The site uses no official logo or seal.</p>
+    <h2>How the site is paid for</h2>
+    <p>The site sells nothing, collects no contact details and carries no affiliate link. If advertising is added one day, it will never sit inside a tool, and it cannot use what you type, which never leaves your browser.</p>
+    <h2>Tell us when something is wrong</h2>
+    <p>Write to <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> with the date and the page. The <a href={route('editorial', lang)}>editorial policy</a> explains how a correction is made and dated. The site has {n} pages of countdowns, calendars and tools.</p>
+    <p class="text-sm text-navy-600">Dates last checked on <time datetime={LAST_UPDATED}>{displayDate(LAST_UPDATED, 'en-US')}</time>.</p>
+  </div>
+</PageLayout>

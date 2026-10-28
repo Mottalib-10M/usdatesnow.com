@@ -1,0 +1,23 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import LegalIdentity from '../../components/LegalIdentity.astro';
+import { CONTACT_EMAIL, LAST_UPDATED, SITE_NAMES } from '../../data/site-config';
+import { route } from '../../i18n/routes';
+import { displayDate } from '../../lib/format';
+const lang = 'en';
+---
+<PageLayout title={`Contact ${SITE_NAMES[lang]}: a wrong date, a closure, the widget`} description="Write to US Dates when a holiday date, an observed day or a closure looks wrong, when an organization changes its calendar, or to embed a countdown on your website." lang={lang} noindex={true} breadcrumbs={[{ label: 'Contact' }]} showAuthor={false}>
+  <div class="prose prose-slate max-w-none">
+    <h1>Contact</h1>
+    <p>Email: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. A person reads every message.</p>
+    <h2>A date or a closure looks wrong</h2>
+    <p>Tell us the date, the page and, if you have it, the official notice that says otherwise: an OPM table, a Federal Reserve schedule, an NYSE announcement, a Postal Service memo or an executive order. We read it, fix the rule or the published list it comes from, add a test and date the change.</p>
+    <h2>What we cannot tell you</h2>
+    <p>We do not know the hours of your local branch, bank, store or post office, and we cannot check whether a parcel will arrive. For a branch, use the locator of the organization concerned.</p>
+    <h2>Using a countdown on your site</h2>
+    <p>Schools, libraries, newsrooms and community pages can show a countdown or the closures checker in an iframe at no cost: see the <a href={route('widget', lang)}>embed page</a>.</p>
+    <h2>Publisher</h2>
+    <LegalIdentity lang={lang} />
+    <p>Updated on <time datetime={LAST_UPDATED}>{displayDate(LAST_UPDATED, 'en-US')}</time>.</p>
+  </div>
+</PageLayout>

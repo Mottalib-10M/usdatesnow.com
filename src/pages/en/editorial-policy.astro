@@ -1,0 +1,27 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { AUTHOR_NAME, CONTACT_EMAIL, LAST_UPDATED, SITE_NAMES } from '../../data/site-config';
+import { route } from '../../i18n/routes';
+import { displayDate } from '../../lib/format';
+const lang = 'en';
+---
+<PageLayout title={`Editorial policy of ${SITE_NAMES[lang]}: rules, lists, corrections`} description="Which laws and official calendars US Dates relies on, how each date is computed and tested, which sources it refuses, and how a mistake is corrected and dated." lang={lang} noindex={true} breadcrumbs={[{ label: 'Editorial policy' }]} showAuthor={false}>
+  <div class="prose prose-slate max-w-none">
+    <h1>Editorial and corrections policy</h1>
+    <p>People plan days off, trips to the post office and trades on these dates. A date that is one day out costs a wasted drive or a missed deadline, so each one is computed from the rule that sets it and, wherever an official list exists, compared with that list by an automated test.</p>
+    <h2>Who is responsible</h2><p>{AUTHOR_NAME}, reachable at <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+    <h2>What we read</h2>
+    <ul>
+      <li>the United States Code on GovInfo: 5 U.S.C. 6103 (legal public holidays), 36 U.S.C. 109 and 117 (Father's Day, Mother's Day), 2 U.S.C. 7 (Election Day);</li>
+      <li>the Office of Personnel Management holiday tables and its fact sheet on Saturday and Sunday holidays, and executive orders on GovInfo;</li>
+      <li>the Federal Reserve Board schedule of holidays, the NYSE holiday calendar and the Nasdaq Trader calendar;</li>
+      <li>the Postal Operations Manual and the Postal Service operations memos and news releases for each holiday;</li>
+      <li>the National Weather Service for the seasons, and gazetted holiday lists abroad (Hong Kong) as a cross-check of lunar dates.</li>
+    </ul>
+    <h2>Sources we refuse</h2><p>Other countdown sites, shipping blogs and retailer pages never supply a date or an opening rule here. When official sources are silent, the page says so; a date that depends on a sighting or an announcement is labeled as an estimate or as not yet announced.</p>
+    <h2>Review cycle</h2><p>The published lists are re-read whenever an organization publishes a new year, and every page is checked again each December and June. An announced change (an executive order closing federal offices, a new exchange holiday) is added on the day it is published.</p>
+    <h2>Corrections</h2>
+    <ol><li>We open the official text again.</li><li>We correct the rule or the list and add an automated test for the case.</li><li>The site rebuilds and every page that uses the date follows.</li></ol>
+    <h2>Independence</h2><p>No agency, bank, exchange, retailer or carrier pays for or reviews what is published here, and the site carries no affiliate link. See also the <a href={route('method', lang)}>method page</a>. Version of <time datetime={LAST_UPDATED}>{displayDate(LAST_UPDATED, 'en-US')}</time>.</p>
+  </div>
+</PageLayout>

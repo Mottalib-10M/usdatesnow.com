@@ -1,0 +1,111 @@
+---
+/**
+ * Home (pillar page). The live countdown first, then the calendar of the coming dates, what is closed
+ * on a given day, the federal holidays, business days and seasons, each with its tool, then every page.
+ * Every date is computed by the engine; no date is typed into this file.
+ */
+import PageLayout from '../layouts/PageLayout.astro';
+import Tool from './Tool.astro';
+import Clamp from './Clamp.astro';
+import Sources from './Sources.astro';
+import { route } from '../i18n/routes';
+import { PAGES } from '../lib/guides';
+import { GROUPS_ORDER, groupLabel } from '../i18n/nav';
+import { helpers } from '../lib/helpers';
+import { LAST_UPDATED, AUTHOR_NAME } from '../data/site-config';
+import { displayDate } from '../lib/format';
+import { faqSchema, webApplicationSchema, websiteSchema, organizationSchema } from '../lib/seo';
+const lang = 'en';
+const h = helpers(lang, true);
+const cards = (g: (typeof GROUPS_ORDER)[number]) => PAGES.filter((p) => p.group === g).map((p) => ({ href: route(p.id, lang), name: p.en.nav, text: p.en.card }));
+const has = (id: string) => PAGES.some((p) => p.id === id);
+const link = (id: string, text: string) => (has(id) ? `<a href="${route(id, lang)}">${text}</a>` : text);
+const f26 = h.fed(2026), f27 = h.fed(2027);
+const obs27 = f27.filter((x) => x.observed !== x.actual);
+
+const title = 'Holiday Countdown 2026 and 2027: Every Date, What Is Closed';
+const description = 'Live countdowns to Christmas, Thanksgiving, Easter and every holiday, with each date for 2026 to 2028 worked out from its rule and whether banks and mail run.';
+const faqs = [
+  { q: 'How many federal holidays are there in a year?', a: `Eleven. Section 6103 of title 5 of the US Code lists them: New Year's Day, Martin Luther King Jr. Day, Washington's Birthday, Memorial Day, Juneteenth, Independence Day, Labor Day, Columbus Day, Veterans Day, Thanksgiving and Christmas. Juneteenth was the last one added, in 2021. A president can give federal employees an extra day off by executive order, as on December 24 and 26, 2025, but that does not create a new legal holiday.` },
+  { q: 'Why does a holiday sometimes move to a Friday or a Monday?', a: `Because federal employees on a Monday-to-Friday week would otherwise lose it. When a holiday falls on a Saturday, the Friday before is their day off; when it falls on a Sunday, the Monday after. In 2027 that happens ${obs27.length} times: ${obs27.map((x) => `${x.name} on ${h.dateS(x.observed)}`).join(', ')}. Banks, the stock market and the post office each apply their own version of the rule.` },
+  { q: 'Is a countdown to Christmas counted to midnight or to the morning?', a: 'Here it runs to midnight at the very start of December 25 in your own time zone, which your browser reports to the page. Someone in Los Angeles therefore reaches zero three hours after someone in New York. The day count, the weekends and the business days left are worked out from the same date, and the clock ticks every second once the page has loaded.' },
+  { q: 'Are banks open on federal holidays?', a: 'Most banks close on the days the Federal Reserve Banks close, because checks and transfers do not settle on those days. The Reserve Banks close on all eleven holidays, move a Sunday holiday to the Monday, but stay open on the Friday before a Saturday holiday. A bank can still choose to open a branch: the Federal Reserve calendar tells you when payments will not move.' },
+  { q: 'Do the stock market and the post office close on the same days?', a: 'No. The New York Stock Exchange and Nasdaq stay open on Columbus Day and Veterans Day, when post offices and banks close, and they close on Good Friday, which is not a federal holiday. The Postal Service closes on the holiday itself when it falls on a Saturday, while the market closes on the Friday before. The closures tool lists all of them for any date.' },
+  { q: 'How far ahead can holiday dates be known?', a: 'For holidays fixed by a rule, indefinitely: Thanksgiving 2040 is already the fourth Thursday of November 2040, and Easter can be computed for any year. What cannot be known in advance is a date someone has yet to set: a Super Bowl the league has not scheduled, an extra day off given by executive order, or the start of Ramadan where it depends on seeing the new crescent.' },
+  { q: 'Does this site keep or send what I enter?', a: 'No. The countdowns and checkers run in your browser from rules built into the page; the dates you pick and your time zone are never sent to us or stored. The site has no account, newsletter or form. Closing the tab clears everything, and the same page works offline once it has loaded.' },
+];
+const jsonLd = [websiteSchema(lang), organizationSchema(lang), webApplicationSchema({ name: 'US holiday countdown', description, path: route('home', lang), lang }), faqSchema(faqs, lang)];
+const resume = `Every date on this site is worked out from the rule that sets it, not copied from a list. Thanksgiving is the fourth Thursday of November, so it falls on ${h.ev('thanksgiving', 2026)}, then on ${h.ev('thanksgiving', 2027)}. Mother's Day is the second Sunday of May under 36 U.S.C. 117, Memorial Day the last Monday of May, Easter the first Sunday after the ecclesiastical full moon that follows March 21, which gives ${h.ev('easter', 2027)}. The eleven federal holidays come from 5 U.S.C. 6103, and when one lands on a weekend, offices, banks, the stock market and the post office do not all move it the same way: Independence Day 2026 is a Saturday, so federal offices and the stock market close on Friday, July 3, the Federal Reserve Banks stay open that Friday, and post offices close on the Saturday itself. The countdown above runs to midnight in your own time zone, ticking every second, with the weekends and business days left. The calendars below cover 2026, 2027 and 2028, and each one has been compared with the list its organization publishes.`;
+---
+<PageLayout title={title} description={description} lang={lang} jsonLd={jsonLd} faqs={faqs} breadcrumbs={[]}>
+  <header class="mb-3">
+    <h1 class="mt-0 text-[1.75rem] font-bold text-navy-900 max-sm:leading-tight sm:text-3xl md:text-4xl">Holiday countdown 2026 and 2027</h1>
+    <p class="mt-2 text-base text-navy-700 sm:text-lg">Pick a holiday: the date, the weekday and a live count of days, hours and minutes in your time zone, for this year and the next two.</p>
+  </header>
+  <div data-outil class="mb-4"><Tool tool={{ kind: 'countdown', props: { event: 'christmas' } }} primary={true} seedKey="home" /></div>
+  <Clamp text={resume} id="clamp-home" lang={lang} class="mb-3" />
+  <p class="mb-8 text-sm text-navy-600">Rules and calendars checked on <time datetime={LAST_UPDATED}>{displayDate(LAST_UPDATED, 'en-US')}</time> · {AUTHOR_NAME} · <a href={route('method', lang)} class="underline hover:text-navy-900">How each date is worked out</a> · <a href={route('about', lang)} class="underline hover:text-navy-900">About this site</a></p>
+
+  <div class="prose prose-slate max-w-none">
+    <h2>The big dates of 2026, 2027 and 2028</h2>
+    <p>The table gives the dates people search for most, three years at a time. Holidays set on a fixed day of the month change weekday every year; holidays set on a weekday of the month change date. Each row links to a page with its own countdown, the rule written out and the questions people ask about it.</p>
+    <Fragment set:html={h.table(['', '2026', '2027', '2028'], [
+      [link('days-until-christmas', 'Christmas Day'), h.ev('christmas', 2026, 's'), h.ev('christmas', 2027, 's'), h.ev('christmas', 2028, 's')],
+      [link('thanksgiving', 'Thanksgiving'), h.ev('thanksgiving', 2026, 's'), h.ev('thanksgiving', 2027, 's'), h.ev('thanksgiving', 2028, 's')],
+      [link('easter', 'Easter Sunday'), h.ev('easter', 2026, 's'), h.ev('easter', 2027, 's'), h.ev('easter', 2028, 's')],
+      [link('mothers-day', "Mother's Day"), h.ev('mothers', 2026, 's'), h.ev('mothers', 2027, 's'), h.ev('mothers', 2028, 's')],
+      [link('fathers-day', "Father's Day"), h.ev('fathers', 2026, 's'), h.ev('fathers', 2027, 's'), h.ev('fathers', 2028, 's')],
+      [link('memorial-day', 'Memorial Day'), h.ev('memorial', 2026, 's'), h.ev('memorial', 2027, 's'), h.ev('memorial', 2028, 's')],
+      [link('labor-day', 'Labor Day'), h.ev('labor', 2026, 's'), h.ev('labor', 2027, 's'), h.ev('labor', 2028, 's')],
+      [link('halloween', 'Halloween'), h.ev('halloween', 2026, 's'), h.ev('halloween', 2027, 's'), h.ev('halloween', 2028, 's')],
+      [link('valentines-day', "Valentine's Day"), h.ev('valentines', 2026, 's'), h.ev('valentines', 2027, 's'), h.ev('valentines', 2028, 's')],
+      [link('fourth-of-july', 'Fourth of July'), h.ev('july4', 2026, 's'), h.ev('july4', 2027, 's'), h.ev('july4', 2028, 's')],
+      [link('black-friday', 'Black Friday'), h.ev('blackfriday', 2026, 's'), h.ev('blackfriday', 2027, 's'), h.ev('blackfriday', 2028, 's')],
+      [link('chinese-new-year', 'Lunar New Year'), h.ev('chinesenewyear', 2026, 's'), h.ev('chinesenewyear', 2027, 's'), h.ev('chinesenewyear', 2028, 's')],
+    ], `Computed from 5 U.S.C. 6103, 36 U.S.C. 109 and 117 and the Gregorian Easter algorithm; checked against ${h.src('opm', 'OPM')} and ${h.src('hk2027', 'GovHK')}.`, ['l', 'r', 'r', 'r'])} />
+    <p>Two dates in that table are fixed by law but not federal holidays: Mother's Day and Father's Day are designated by Congress in title 36 of the Code, the chapter of patriotic and national observances, which asks the President to proclaim them but closes nothing. Black Friday is not set by any text at all: it is simply the day after Thanksgiving, and the stock market closes early that day.</p>
+
+    <h2>Is it open today? Offices, banks, markets and the post office</h2>
+    <p>A holiday does not close everything, and the places that close do not always close on the same day. Pick a date: the checker gives the national rule for post office counters, mail delivery, blue collection boxes, banks that follow the Federal Reserve calendar, the stock market and federal offices, with the reason in each case.</p>
+  </div>
+  <div class="mb-6"><Tool tool={{ kind: 'open', props: { focus: 'post' } }} idPrefix="h1" /></div>
+  <div class="prose prose-slate max-w-none">
+    <p>The Postal Service sorts its holidays into two groups in the Postal Operations Manual. On the six widely observed ones (New Year's Day, Memorial Day, Independence Day, Labor Day, Thanksgiving and Christmas) offices close and mail is not collected. On the five others (Martin Luther King Jr. Day, Washington's Birthday, Juneteenth, Columbus Day and Veterans Day) offices also close and regular delivery stops, but collection boxes are still emptied, because most businesses keep working and mailing. The dedicated pages explain the ${link('post-office-open-today', 'post office')}, ${link('mail-delivery-today', 'mail delivery')}, ${link('banks-open-today', 'banks')} and the ${link('stock-market-open-today', 'stock market')} one by one.</p>
+
+    <h2>Federal holidays: the eleven days and their observed dates</h2>
+    <p>Federal holidays bind federal offices and set the calendar most employers, banks and schools start from. In 2026 the observed days run from ${h.dateS(f26[0].observed)} to ${h.dateS(f26[10].observed)}; the only shift is Independence Day, observed on ${h.dateW(f26[5].observed)}. In 2027 the calendar is less tidy: Juneteenth and Christmas fall on a Saturday, Independence Day on a Sunday, and New Year's Day 2028 falls on a Saturday, so it is observed on ${h.dateW(h.fed(2028)[0].observed)}, inside 2027. The table tool shows any of the four calendars for 2026, 2027 or 2028, and saves it to your own calendar.</p>
+  </div>
+  <div class="mb-6"><Tool tool={{ kind: 'holidays', props: { cal: 'federal', year: 2027 } }} idPrefix="h2" /></div>
+  <div class="prose prose-slate max-w-none">
+    <p>Each year has its own page: ${link('federal-holidays-2026', 'federal holidays 2026')}, ${link('federal-holidays-2027', 'federal holidays 2027')} and ${link('federal-holidays-2028', 'federal holidays 2028')}, with the bank calendars of ${link('bank-holidays-2026', '2026')} and ${link('bank-holidays-2027', '2027')}, the ${link('stock-market-holidays', 'stock market holidays')} and the ${link('post-office-holidays-2027', 'post office holidays')}.</p>
+
+    <h2>Why the rule matters more than the list</h2>
+    <p>Lists go out of date; rules do not. A page that copies last year's holidays shows the right names with the wrong days, and a page that publishes next year's dates only when someone remembers to update it is empty when people start planning. Working from the rule removes both problems. The program behind this site knows that Memorial Day is the last Monday of May, so it gives ${h.ev('memorial', 2027)} for 2027 and ${h.ev('memorial', 2028)} for 2028 without anyone typing them; it knows the Federal Reserve leaves its Banks open when a holiday falls on a Saturday, so it marks banks open on ${h.dateW('2027-12-24')}, the day federal offices observe Christmas 2027.</p>
+    <p>Rules can still be misread, so every rule is tested against the lists published by the organizations themselves. The OPM tables of federal holidays for 2026, 2027 and 2028, the Federal Reserve schedule, the NYSE calendar with its 1:00 p.m. early closes, and the Postal Service memo for July 4, 2026 are all reproduced by the program to the day, and the test suite fails if a single date differs. When one of those organizations publishes a new year, its list is added to the tests the same day.</p>
+    <p>Some dates are not set by a rule at all. The Super Bowl is scheduled by the National Football League: ${h.P.superBowl.games[1].number} is set for ${h.dateW(h.P.superBowl.games[1].date!)}, while the 2028 game has a venue but no announced date, and the site says so rather than guessing. Ramadan begins with the sighting of the new crescent, so its date is shown as an estimate with the method behind it. Extra days off given by executive order are added when the order is signed.</p>
+
+    <h2>Business days, weekends and long weekends</h2>
+    <p>Counting days to a holiday is one thing; counting the working days left is what matters for a delivery, a filing or a notice period. The counter below takes two dates and counts Monday to Friday, leaving out the federal holidays on their observed days, which is how most US deadlines expressed in business days are read. It also lists the holidays it skipped, so the count can be checked by hand.</p>
+  </div>
+  <div class="mb-6"><Tool tool={{ kind: 'workdays' }} idPrefix="h3" /></div>
+  <div class="prose prose-slate max-w-none">
+    <p>Five of the eleven federal holidays are set on a Monday, so they always make a three-day weekend: Martin Luther King Jr. Day, Washington's Birthday, Memorial Day, Labor Day and Columbus Day. The five fixed-date holidays make a long weekend only when they fall on a Monday or a Friday, or when they move there because of a weekend; Thanksgiving, always a Thursday, does so only where the Friday after is given too. The ${link('business-days', 'business days page')} goes further, with the rules used by courts and carriers.</p>
+
+    <h2>Seasons, moons and the dates that follow the sky</h2>
+    <p>The first day of each astronomical season is the moment of an equinox or a solstice, which falls at a precise minute and so on a different calendar day depending on the time zone. The winter solstice of 2026 comes at ${h.season('winter', 2026)}, the spring equinox of 2027 at ${h.season('spring', 2027)}. The lunar new year and Ramadan depend on new moons; Easter on a calendar moon fixed by church rules. Each has a page with its countdown and method: ${link('first-day-of-winter', 'first day of winter')}, ${link('first-day-of-spring', 'first day of spring')}, ${link('chinese-new-year', 'Chinese New Year')} and ${link('ramadan', 'Ramadan')}.</p>
+  </div>
+  <div class="mb-6"><Tool tool={{ kind: 'mini:season' }} idPrefix="h4" /></div>
+  <div class="prose prose-slate max-w-none">
+    <h2>Every page of the site</h2>
+  </div>
+  <div class="not-prose grid gap-6 sm:grid-cols-2 lg:grid-cols-4" data-sommaire>
+    {GROUPS_ORDER.map((g) => (
+      <section><h3 class="mb-2 text-lg font-semibold text-navy-900">{groupLabel(g)}</h3><ul class="space-y-2 text-sm">{cards(g).map((c) => <li><a href={c.href} class="font-medium text-accent-700 underline">{c.name}</a><span class="block text-navy-700">{c.text}</span></li>)}</ul></section>
+    ))}
+  </div>
+  <div class="prose prose-slate mt-8 max-w-none">
+    <h2>How this site works</h2>
+    <p>The rules live in one program and the published lists in one parameter file, read on GovInfo, OPM, the Federal Reserve Board, NYSE, Nasdaq Trader and the Postal Service on {h.read}. The countdowns and checkers run in your browser: the dates you pick and your time zone are never sent or stored. The site sells nothing, collects no contact details and recommends no store. The <a href={route('method', lang)}>method page</a> explains each rule, and the <a href={route('editorial', lang)}>editorial policy</a> how a correction is made.</p>
+    <Sources lang={lang} keys={['usc6103', 'opm', 'opm_inlieu', 'fed', 'nyse', 'usps_pom', 'usps_july4', 'mothers', 'fathers', 'election', 'hk2027', 'nws_seasons']} />
+  </div>
+</PageLayout>

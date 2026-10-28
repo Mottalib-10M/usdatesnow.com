@@ -1,0 +1,43 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { LAST_UPDATED } from '../../data/site-config';
+import { route } from '../../i18n/routes';
+import { breadcrumbSchema, articleSchema } from '../../lib/seo';
+import { helpers } from '../../lib/helpers';
+import { displayDate } from '../../lib/format';
+const lang = 'en';
+const h = helpers(lang);
+const s = (k: Parameters<typeof h.src>[0], t: string) => h.src(k, t);
+---
+<PageLayout title="Method of US Dates: holiday rules, closures and countdowns" description="How US Dates computes each holiday from its rule, shifts weekend holidays for offices, banks, markets and the post office, and runs countdowns in your timezone." lang={lang} jsonLd={[articleSchema({ title: 'How each date and closure is worked out', description: 'Method of US Dates', path: route('method', lang), lang }), breadcrumbSchema([{ name: 'Home', path: route('home', lang) }, { name: 'Method', path: route('method', lang) }])]} breadcrumbs={[{ label: 'Method' }]}>
+  <header class="mb-6"><p class="kicker">Method</p><h1 class="mt-0 text-3xl font-bold text-navy-900 md:text-4xl">How each date and closure is worked out</h1></header>
+  <div class="prose prose-slate max-w-none">
+    <p>No date is typed into a page. Each one is computed by a small program from the rule that defines it, and where an organization publishes its own list, an automated test compares the program with that list: the OPM tables for 2026 to 2028, the Federal Reserve schedule, the NYSE calendar and the Hong Kong gazette for the lunar new year. Those lists were read on {h.read}.</p>
+    <h2>1. Holidays fixed by a rule</h2>
+    <ul>
+      <li>Fixed dates: New Year's Day, Juneteenth, Independence Day, Veterans Day and Christmas (<Fragment set:html={s('usc6103', '5 U.S.C. 6103(a)')} />), Valentine's Day, Halloween, Christmas Eve.</li>
+      <li>An n-th weekday of a month: Martin Luther King Jr. Day and Washington's Birthday (third Monday of January and February), Memorial Day (last Monday of May), Labor Day (first Monday of September), Columbus Day (second Monday of October), Thanksgiving (fourth Thursday of November), Mother's Day (second Sunday of May, <Fragment set:html={s('mothers', '36 U.S.C. 117')} />), Father's Day (third Sunday of June, <Fragment set:html={s('fathers', '36 U.S.C. 109')} />).</li>
+      <li>Election Day: the Tuesday after the first Monday of November in even years (<Fragment set:html={s('election', '2 U.S.C. 7')} />). Black Friday and Cyber Monday: one and four days after Thanksgiving.</li>
+      <li>Easter: the anonymous Gregorian algorithm (Meeus, Jones, Butcher), exact for any year after 1582; Good Friday is two days earlier.</li>
+    </ul>
+    <h2>2. Weekend holidays: four institutions, four answers</h2>
+    <ul>
+      <li>Federal offices: a Saturday holiday is observed the Friday before (5 U.S.C. 6103(b)), a Sunday holiday the Monday after (Executive Order 11582, <Fragment set:html={s('opm_inlieu', 'OPM fact sheet')} />). So New Year's Day 2028, a Saturday, is observed on Friday, December 31, 2027.</li>
+      <li>Federal Reserve Banks: closed the Monday after a Sunday holiday, but open the Friday before a Saturday holiday (<Fragment set:html={s('fed', 'Federal Reserve Board')} />). Most banks follow this calendar, which is why they are open on July 3, 2026.</li>
+      <li>NYSE and Nasdaq: the federal holidays except Columbus Day and Veterans Day, plus Good Friday; a Saturday holiday closes the Friday before, except New Year's Day, which is then not observed at all; 1:00 p.m. closes the day after Thanksgiving and on a weekday July 3 or December 24 that is not itself a holiday (<Fragment set:html={s('nyse', 'NYSE calendar')} />).</li>
+      <li>Postal Service: post offices close on the holiday itself when it falls on a Saturday, and on the Monday when it falls on a Sunday (<Fragment set:html={s('usps_july4', 'USPS memo for July 4, 2026')} />). Collection boxes are not picked up on the six widely observed holidays and are still collected on the five others (<Fragment set:html={s('usps_pom', 'Postal Operations Manual 125.22')} />, <Fragment set:html={s('usps_columbus', 'Columbus Day memo')} />).</li>
+    </ul>
+    <p>An executive order can close federal offices on an extra day, as on December 24 and 26, 2025 (<Fragment set:html={s('eo2025', 'Executive Order 14371')} />). Such days are added to the federal calendar when the order is published; they do not by themselves close banks, the stock market or post offices.</p>
+    <h2>3. Seasons and lunar dates</h2>
+    <p>Equinoxes and solstices are computed with chapter 27 of Jean Meeus, Astronomical Algorithms, with its 24 periodic terms (about one minute of accuracy), and new moons with chapter 49. The lunar new year is the second new moon after the winter solstice, dated in China Standard Time; the 2027 date matches the <Fragment set:html={s('hk2027', 'Hong Kong gazette')} />. The start of Ramadan depends on the sighting of the crescent and is shown as an estimate: the month is taken to begin on the first evening when the moon is at least 12 hours old at sunset on the Pacific coast, which matches the North American start dates of 2024, 2025 and 2026.</p>
+    <h2>4. Countdowns</h2>
+    <p>The countdown runs in your browser, to midnight at the start of the day in your own time zone, or to the exact minute of an equinox or solstice. Weekends count complete Saturday and Sunday pairs; business days count Monday to Friday and leave out the federal holidays (observed days). The page first shows the count as of the day it was built, then switches to your clock as soon as it loads.</p>
+    <h2>5. What the site does not do</h2>
+    <ul>
+      <li>It does not know the hours of a particular branch, store or post office, or the cut-off of a particular carrier.</li>
+      <li>It does not announce dates that the organizer has not announced (the 2028 Super Bowl date, for instance).</li>
+      <li>It does not keep anything you type.</li>
+    </ul>
+    <p>Method version of <time datetime={LAST_UPDATED}>{displayDate(LAST_UPDATED, 'en-US')}</time>. A date that looks wrong: <a href={route('contact', lang)}>contact</a>.</p>
+  </div>
+</PageLayout>
